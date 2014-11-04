@@ -34,6 +34,12 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 			this.vis = this.graph.vis;
 		}
 
+		if (typeof (args.gridValues) === 'undefined') { //when true, display the axis-tick-values in the chart as part of the grid too
+		    this.gridValues = true;
+		} else {
+		    this.gridValues = args.gridValues;
+		}
+
 		var self = this;
 		this.graph.onUpdate( function() { self.render() } );
 	},
@@ -106,6 +112,10 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 
 	_drawGrid: function(axis) {
 		var gridSize = (this.orientation == 'right' ? 1 : -1) * this.graph.width;
+
+		if (!this.gridValues) { //specify an empty format for the tickValues so that the values are not visible in the chart
+		    axis.tickFormat(function (d) { return ""; }); 
+		}
 
 		this.graph.vis
 			.append("svg:g")
