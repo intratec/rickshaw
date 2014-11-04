@@ -314,7 +314,7 @@ Rickshaw.Graph = function(args) {
 		this.height = args.height || elementHeight || 250;
 
 		this.vis && this.vis
-			.attr('width', this.width)
+			.attr('width', '100%')
 			.attr('height', this.height);
 	};
 

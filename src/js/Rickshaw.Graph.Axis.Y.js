@@ -57,9 +57,12 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 		this.width = args.width || elementWidth || this.graph.width * this.berthRate;
 		this.height = args.height || elementHeight || this.graph.height;
 
+		var myHeight = this.height * (1 + this.berthRate);
+
 		this.vis
 			.attr('width', this.width)
-			.attr('height', this.height * (1 + this.berthRate));
+			.attr('height', myHeight)
+            .attr('style', 'width:' + this.width + 'px; height: ' + myHeight + 'px');  //set css width and hight too. required for css3-table layouts
 
 		//var berth = this.height * this.berthRate; //do not change the top-position for left-axis, the bottom ticks gets invisible that way (tested Firefox, IE10, Google Chrome)
 
