@@ -61,11 +61,11 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 			.attr('width', this.width)
 			.attr('height', this.height * (1 + this.berthRate));
 
-		var berth = this.height * this.berthRate;
+		//var berth = this.height * this.berthRate; //do not change the top-position for left-axis, the bottom ticks gets invisible that way (tested Firefox, IE10, Google Chrome)
 
-		if (this.orientation == 'left') {
-			this.element.style.top = -1 * berth + 'px';
-		}
+		//if (this.orientation == 'left') {
+		//	this.element.style.top = -1 * berth + 'px';
+		//}
 	},
 
 	render: function() {
@@ -86,8 +86,11 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 		axis.tickFormat(this.tickFormat);
 		if (this.tickValues) axis.tickValues(this.tickValues);
 
+		var transform = '';
+
 		if (this.orientation == 'left') {
-			var berth = this.height * this.berthRate;
+		    var berth = this.height * this.berthRate;
+		    berth = 0; //do not translate the height, the bottom ticks gets invisible
 			var transform = 'translate(' + this.width + ', ' + berth + ')';
 		}
 
