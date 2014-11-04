@@ -66,6 +66,9 @@ Rickshaw.Graph.Behavior.Series.Highlight = function(args) {
 				}
 			} );
 
+			/*//BugFix, do not store the original series color longer than required*/
+		    /*       so that we can override the color after each highlighting operation*/
+			colorSafe = {}; //clear color save
 			self.graph.update();
 
 		}, false );
