@@ -59,12 +59,26 @@ Rickshaw.Graph.Legend = Rickshaw.Class.create( {
 
 		line.appendChild(swatch);
 
+		var labelContainer = document.createElement('span');
+		labelContainer.className = 'labelContainer';
+		line.appendChild(labelContainer);
+
 		var label = document.createElement('span');
 		label.className = 'label';
 		label.innerHTML = series.name;
+		labelContainer.appendChild(label);
+		
 
-		line.appendChild(label);
-		this.list.appendChild(line);
+		if (series.nameDetails && series.nameDetails != '') {
+		    var labelDetails = document.createElement('span');
+		    labelDetails.className = 'labelDetails';
+		    labelDetails.innerHTML = series.nameDetails;
+
+		    line.className += ' hasDetails';
+		    labelContainer.appendChild(labelDetails);
+		}
+
+		this.list.appendChild(line);		
 
 		line.series = series;
 
