@@ -54,6 +54,10 @@
 	cursor: pointer;
 	font-size: 14px;
 }
+.rickshaw_legend .line .labelDetails {
+    display: block;
+    margin-left:2em;
+}
 .rickshaw_legend .line.disabled {
 	opacity: 0.4;
 }
