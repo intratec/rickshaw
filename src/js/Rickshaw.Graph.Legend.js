@@ -70,12 +70,14 @@ Rickshaw.Graph.Legend = Rickshaw.Class.create( {
 		
 
 		if (series.nameDetails && series.nameDetails != '') {
-		    var labelDetails = document.createElement('span');
-		    labelDetails.className = 'labelDetails';
-		    labelDetails.innerHTML = series.nameDetails;
+		    $.each(series.nameDetails, function (index, item) { /*if nameDetails is an array, add span for each item*/
+		        var labelDetails = document.createElement('span');
+		        labelDetails.className = 'labelDetails';
+		        labelDetails.innerHTML = item;
 
-		    line.className += ' hasDetails';
-		    labelContainer.appendChild(labelDetails);
+		        line.className += ' hasDetails';
+		        labelContainer.appendChild(labelDetails);
+		    });
 		}
 
 		this.list.appendChild(line);		
