@@ -95,7 +95,7 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 
 			var point = {
 				formattedXValue: xFormatter(value.x),
-				formattedYValue: yFormatter(series.scale ? series.scale.invert(value.y) : value.y),
+				formattedYValue: yFormatter(value.y != null ? (series.scale ? series.scale.invert(value.y) : value.y) : null),
 				series: series,
 				value: value,
 				distance: distance,
