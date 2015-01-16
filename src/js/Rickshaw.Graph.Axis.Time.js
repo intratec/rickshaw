@@ -71,7 +71,12 @@ Rickshaw.Graph.Axis.Time = function(args) {
 
 			var title = document.createElement('div');
 			title.classList.add('title');
-			title.innerHTML = o.unit.formatter(new Date(o.value * 1000));
+			if (typeof o.unit.formatterX === "function") {
+			    title.innerHTML = o.unit.formatterX(o.value);
+			}
+			else {
+			    title.innerHTML = o.unit.formatter(new Date(o.value * 1000));
+			}
 			element.appendChild(title);
 
 			self.graph.element.appendChild(element);
