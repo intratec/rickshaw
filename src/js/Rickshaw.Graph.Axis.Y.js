@@ -91,7 +91,13 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 		this._renderHeight = this.graph.height;
 	},
 
+	_beforeDrawAxis: function (scale) {
+	    /*override in subclass to adapt this axis before it draws the given scale*/
+	},
+
 	_drawAxis: function(scale) {
+		this._beforeDrawAxis(scale);
+
 		var axis = d3.svg.axis().scale(scale).orient(this.orientation);
 		axis.tickFormat(this.tickFormat);
 		if (this.tickValues) axis.tickValues(this.tickValues);
