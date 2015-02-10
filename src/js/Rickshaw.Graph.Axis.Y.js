@@ -24,7 +24,7 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 			this.element = args.element;
 			this.vis = d3.select(args.element)
 				.append("svg:svg")
-				.attr('class', 'rickshaw_graph y_axis');
+				.attr('class', 'rickshaw_graph y_axis '+ this.orientation);
 
 			this.element = this.vis[0][0];
 			this.element.style.position = 'relative';
@@ -97,6 +97,7 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 		if (this.tickValues) axis.tickValues(this.tickValues);
 
 		var transform = '';
+		var transform_label = '';
 
 		if (this.orientation == 'left') {
 		    var berth = this.height * this.berthRate;
@@ -116,17 +117,47 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 
 		// add label
 		if (this.args.label && this.args.label.text) {
-			var label = this.args.label;
+		    var label = this.args.label;
+
+		    var labeltext;
+		    if (typeof label.text === "function") {
+		        labeltext = label.text();
+		    }
+		    else {
+		        labeltext = label.text;
+		    }
+
+		    var fontsize = (label.fontSize || "10px");
+
+		    if (this.orientation == 'left') {
+		        var transform_label = 'translate(' + this.width + ',0)' + ' ';
+		    }
+
+		    var self = this;
+		    
 			this.vis.append("text")
 				.attr("class", "axis-label")
 				.attr("text-anchor", "end")
-				.attr("y", label.offsetX || "1em")
+				.attr("y", function () {
+				    var value = (label.offsetX || "1em");
+				    if (self.orientation == "left") {
+				        value = parseFloat(value) * -0.5 + "em";
+				    }
+				    return value;
+				})
 				.attr("x", label.offsetY || "1em")
+                .attr("dy", function () {
+                    var value;
+                    if (self.orientation == "left") {
+                        value = fontsize;
+                    }
+                    return value;
+                })
 				.style("color", label.color || "black")
 				.style("opacity", label.opacity || "0.5")
-				.style("font-size", label.fontSize || "10px")
-				.attr("transform", "rotate(-90)")
-				.text(label.text);
+				.style("font-size", fontsize)
+				.attr("transform", transform_label + "rotate(-90)")
+				.text(labeltext);
 		}
 
 		return axis;
