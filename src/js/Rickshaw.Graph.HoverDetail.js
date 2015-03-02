@@ -158,6 +158,13 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 
 		if (point.value.y === null) return;
 
+		var yPos = this.graph.y(point.value.y0 + point.value.y);
+
+        /*if dot is outside of the graph, do not render it*/
+		if (yPos < -5) return;
+		if (yPos > (this.graph.height + 5))
+		    return;
+
 		var formattedXValue = point.formattedXValue;
 		var formattedYValue = point.formattedYValue;
 
@@ -179,7 +186,7 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 		var actualY = series.scale ? series.scale.invert(point.value.y) : point.value.y;
 
 		item.innerHTML = this.formatter(series, point.value.x, actualY, formattedXValue, formattedYValue, point);
-		item.style.top = this.graph.y(point.value.y0 + point.value.y) + 'px';
+		item.style.top = yPos + 'px';
 
 		this.element.appendChild(item);
 
