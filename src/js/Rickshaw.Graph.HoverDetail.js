@@ -18,7 +18,13 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 		element.className = 'detail';
 
 		this.visible = true;
-		graph.element.appendChild(element);
+		var container = graph.element; //normally the hoverdetail is a sibling of the chart
+
+		if (args.container !== undefined) {
+		    container = args.container; //can configure the container where the hoverdetail should be attached
+		}
+
+		container.appendChild(element);
 
 		this.lastEvent = null;
 		this._addListeners();
