@@ -286,5 +286,52 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 			}.bind(this),
 			false
 		);
+
+	    //IDEA from: http://stackoverflow.com/questions/16974178/detecting-both-left-and-right-mouse-movement-and-no-movement
+        //we could detect the mousemove direction so that the legend is not displayed on the side to which we move the mouse
+		//this.graph.element.addEventListener(
+		//	'mousedirection',
+		//	function (e) {
+		//	    this.visible = true;
+		//	    this.mousedirection = e.direction;
+		//	    this.update();
+		//	}.bind(this),
+		//	false
+		//);
+
+		//var options = {};
+		//var oldx = 0;
+		//var direction = "";
+		//var stop_timeout = false;
+		//var stop_check_time = 150;
+
+		//this.graph.element.addEventListener(
+        //    'mousemove',
+        //    function (e) {
+        //        var activeElement = e.target || e.srcElement;
+        //        if (e.pageX > oldx) {
+        //            direction = "right";
+        //        } else if (e.pageX < oldx) {
+        //            direction = "left";
+        //        }
+
+        //        clearTimeout(stop_timeout);
+        //        stop_timeout = setTimeout(function () {
+        //            direction = "stop";
+        //            $(activeElement).trigger(direction);
+        //            $(activeElement).trigger({
+        //                type: "mousedirection",
+        //                direction: direction
+        //            });
+        //        }, stop_check_time);
+
+        //        $(activeElement).trigger(direction);
+        //        $(activeElement).trigger({
+        //            type: "mousedirection",
+        //            direction: direction
+        //        });
+        //        oldx = e.pageX;
+        //    }.bind(this),
+        //    false);
 	}
 });
