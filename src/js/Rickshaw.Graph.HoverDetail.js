@@ -51,8 +51,12 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 
 		var graph = this.graph;
 
+        //required if other mouse events are bound to the graph (dragging, ...)
+	    //var eventX = e.layerX;
+	    //var eventY = e.layerY
 		var eventX = e.offsetX || e.layerX;
 		var eventY = e.offsetY || e.layerY;
+        
 
 		var j = 0;
 		var points = [];
